@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34916.146
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PR3-SecureAPI", "PR3-SecureAPI\PR3-SecureAPI.csproj", "{37C6AC39-4B03-4A6E-ADB6-6999F8D643DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37C6AC39-4B03-4A6E-ADB6-6999F8D643DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37C6AC39-4B03-4A6E-ADB6-6999F8D643DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37C6AC39-4B03-4A6E-ADB6-6999F8D643DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37C6AC39-4B03-4A6E-ADB6-6999F8D643DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DA63C0E4-207D-4283-8C19-66501E47ECF1}
+	EndGlobalSection
+EndGlobal

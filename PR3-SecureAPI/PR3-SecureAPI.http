@@ -1,0 +1,6 @@
+@PR3_SecureAPI_HostAddress = http://localhost:5011
+
+GET {{PR3_SecureAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
