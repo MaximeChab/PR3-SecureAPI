@@ -8,12 +8,12 @@ namespace PR3_SecureAPI.Controllers
 {
     [ApiController]
     [Authorize]
-    [Route("[controller]")]
-    public class EtablissementController : ControllerBase
+    [Route("api/[controller]")]
+    public class EtablissementsController : ControllerBase
     {
         private readonly EtablissementContext _context;
 
-        public EtablissementController(EtablissementContext context)
+        public EtablissementsController(EtablissementContext context)
         {
             _context = context;
         }
