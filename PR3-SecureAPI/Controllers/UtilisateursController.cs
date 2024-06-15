@@ -4,6 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using PR3_SecureAPI.Models;
 using System.Text;
 using System.Security.Cryptography;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 
 namespace PR3_SecureAPI.Controllers
 {
@@ -44,6 +48,7 @@ namespace PR3_SecureAPI.Controllers
             return utilisateur;
         }
 
+
         // PUT: api/Utilisateurs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -76,7 +81,7 @@ namespace PR3_SecureAPI.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("Create")]
         public async Task<ActionResult<Utilisateur>> PostEtablissement(Utilisateur utilisateur)
         {
             utilisateur.MotDePasse = HashString(utilisateur.MotDePasse);
@@ -84,6 +89,33 @@ namespace PR3_SecureAPI.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUtilisateur", new { id = utilisateur.Id }, utilisateur);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(LoginRequest login)
+        {
+            login.MotDePasse = HashString(login.MotDePasse);
+            var utilisateur = await _context.Utilisateur.FirstOrDefaultAsync(u => u.Login == login.Login && u.MotDePasse == login.MotDePasse);
+            if (utilisateur == null)
+            {
+                return Unauthorized();
+            }
+            string token = this.GenerateToken(utilisateur.Login); // Using the username for the token
+            var obj = new
+            {
+                token,
+                Utilisateur = new
+                {
+                    utilisateur.Id,
+                    utilisateur.Login,
+                    utilisateur.Nom, // Assuming the user has a name field, add other fields as needed
+                    utilisateur.Prenom, // Assuming the user has a first name field, add other fields as needed
+                    utilisateur.Role
+                }
+            };
+            return Ok(obj);
+
         }
 
         // DELETE: api/Utilisateurs/5
@@ -126,6 +158,17 @@ namespace PR3_SecureAPI.Controllers
                 }
                 return builder.ToString();
             }
+        }
+        private string GenerateToken(String user)
+        {
+            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("96ZP0WzO5W3ZMWWVqZVhsUK0h3lChcdj96ZP0WzO5W3ZMWWVqZVhsUK0h3lChcdj"));
+            SigningCredentials credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            List<Claim> claims = new List<Claim>() { new Claim("username", user) };
+
+            JwtSecurityToken st = new JwtSecurityToken("3iL", "API test", claims, DateTime.UtcNow, DateTime.UtcNow.AddHours(1), credentials);
+
+            return new JwtSecurityTokenHandler().WriteToken(st);
         }
 
     }

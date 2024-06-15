@@ -4,6 +4,10 @@ using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Security.Claims;
+using PR3_SecureAPI.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PR3_SecureAPI.Controllers
 {
@@ -11,6 +15,14 @@ namespace PR3_SecureAPI.Controllers
     [Route("[controller]")]
     public class AuthController : ControllerBase
     {
+        private readonly UtilisateurContext _context;
+
+        public AuthController(UtilisateurContext context)
+        {
+            _context = context;
+        }
+
+
         [HttpPost]
         public ActionResult Login()
         {
@@ -29,6 +41,12 @@ namespace PR3_SecureAPI.Controllers
             JwtSecurityToken st = new JwtSecurityToken("3iL", "API test", claims, DateTime.UtcNow, DateTime.UtcNow.AddHours(1), credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(st);
+        }
+
+        public class LoginRequest
+        {
+            public string Login { get; set; }
+            public string MotDePasse { get; set; }
         }
     }
 }

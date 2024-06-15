@@ -38,6 +38,7 @@ namespace PR3_SecureAPI.Controllers
             return poste;
         }
 
+        [AllowAnonymous]
         [HttpGet("ByMacAdress/{macAdress}")]
         public async Task<ActionResult<Poste>> GetPosteByMacAdress(string macAdress)
         {
@@ -47,7 +48,10 @@ namespace PR3_SecureAPI.Controllers
             {
                 return NotFound();
             }
+            poste.IsConnected = true; 
 
+            // Save changes to the database
+            await _context.SaveChangesAsync();
             return poste;
         }
 
