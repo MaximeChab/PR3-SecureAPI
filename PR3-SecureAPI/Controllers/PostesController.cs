@@ -86,9 +86,27 @@ namespace PR3_SecureAPI.Controllers
 
             return NoContent();
         }
+        [AllowAnonymous]
+        [HttpPut("DisconnectByMacAdress/{macAdress}")]
+        public async Task<IActionResult> DisconnectPosteByMacAdress(string macAdress)
+        {
+            var poste = await _context.Poste.FirstOrDefaultAsync(p => p.MacAdress == macAdress);
 
+            if (poste == null)
+            {
+                return NotFound();
+            }
+
+            poste.IsConnected = false;
+
+            // Save changes to the database
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
         // POST: api/Postes
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
+        [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult<Poste>> PostPoste(Poste poste)
         {

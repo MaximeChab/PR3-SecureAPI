@@ -80,7 +80,7 @@ namespace PR3_SecureAPI.Controllers
             return NoContent();
         }
 
-
+        [AllowAnonymous]
         [HttpPost("Create")]
         public async Task<ActionResult<Utilisateur>> PostEtablissement(Utilisateur utilisateur)
         {

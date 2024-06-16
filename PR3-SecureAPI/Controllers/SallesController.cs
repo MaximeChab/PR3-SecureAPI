@@ -18,6 +18,7 @@ namespace PR3_SecureAPI.Controllers
         }
 
         // GET: api/ClasseItems
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Salle>>> GetClasseItems()
         {
@@ -25,6 +26,7 @@ namespace PR3_SecureAPI.Controllers
         }
 
         // GET: api/ClasseItems/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<Salle>> GetClasseItem(int id)
         {

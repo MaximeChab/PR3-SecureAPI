@@ -16,6 +16,7 @@ builder.Services.AddDbContext<SalleContext>(options => options.UseSqlite("DataSo
 builder.Services.AddDbContext<PosteContext>(options => options.UseSqlite("DataSource=C:\\Users\\maxim\\Desktop\\PR3\\PR3-SecureAPI\\PR3-SecureAPI\\PR3-database.db"));
 builder.Services.AddDbContext<UtilisateurContext>(options => options.UseSqlite("DataSource=C:\\Users\\maxim\\Desktop\\PR3\\PR3-SecureAPI\\PR3-SecureAPI\\PR3-database.db"));
 builder.Services.AddDbContext<EtablissementContext>(options => options.UseSqlite("DataSource=C:\\Users\\maxim\\Desktop\\PR3\\PR3-SecureAPI\\PR3-SecureAPI\\PR3-database.db"));
+builder.Services.AddDbContext<IncidentContext>(options => options.UseSqlite("DataSource=C:\\Users\\maxim\\Desktop\\PR3\\PR3-SecureAPI\\PR3-SecureAPI\\PR3-database.db"));
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
