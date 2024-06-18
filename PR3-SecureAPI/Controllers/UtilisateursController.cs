@@ -31,13 +31,41 @@ namespace PR3_SecureAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Utilisateur>>> GetUtilisateur()
         {
-            return await _context.Utilisateur.ToListAsync();
+            /*var utilisateurs = await _context.Utilisateur
+            .Select(u => new {
+                u.Id,
+                u.Nom,
+                u.Prenom,
+                u.Role,
+                // Include other properties you need
+            })
+            .ToListAsync();
+
+            return Ok(utilisateurs);*/
+           return await _context.Utilisateur.ToListAsync();
         }
 
         // GET: api/Utilisateurs/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Utilisateur>> GetUtilisateur(int id)
         {
+            /*var utilisateur = await _context.Utilisateur
+            .Where(u => u.Id == id)
+            .Select(u => new {
+                u.Id,
+                u.Nom,
+                u.Prenom,
+                u.Role,
+                // Include other properties you need
+            })
+            .FirstOrDefaultAsync();
+
+            if (utilisateur == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(utilisateur);*/
             var utilisateur = await _context.Utilisateur.FindAsync(id);
 
             if (utilisateur == null)
